@@ -39,7 +39,24 @@ python scripts/config_all.py --go aliyun
 
 ## 📦 安装
 
-### AI IDE 使用（OpenCode、Cursor 等）
+### 方式一：一键安装（推荐）
+
+```bash
+# 使用 npx（需要 Node.js）
+npx skills add https://github.com/normdist-ai/china-mirrors --skill china-mirrors
+```
+
+### 方式二：手动克隆
+
+```bash
+# 克隆仓库
+git clone https://github.com/normdist-ai/china-mirrors.git
+
+# 复制技能文件夹到你的 IDE 技能目录
+cp -r china-mirrors/skills/china-mirrors ~/.config/opencode/skills/
+```
+
+### 方式三：手动复制（AI IDE）
 
 将 `skills/china-mirrors` 文件夹复制到你的 IDE 技能目录：
 
