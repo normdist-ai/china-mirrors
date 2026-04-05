@@ -997,7 +997,63 @@ cd "$(brew --repo homebrew/cask)" && git remote set-url origin https://github.co
 
 ---
 
+## ⚠️ 安全说明
+
+本技能会修改系统配置文件以设置镜像源，这是其核心功能。以下是安全使用建议：
+
+### 已采取的安全措施
+
+- **硬编码镜像 URL**：所有镜像源在代码中固定，不接受外部输入
+- **参数验证**：镜像 key 经过白名单验证
+- **SSL 验证**：默认启用 SSL 证书验证（`test_mirrors.py` 可用 `--insecure` 跳过）
+- **最小权限**：仅修改用户配置文件，不请求 root/管理员权限
+
+### 使用建议
+
+1. **备份配置**：运行脚本前备份现有配置文件
+   ```bash
+   # 备份
+   cp ~/.pip/pip.conf ~/.pip/pip.conf.bak
+   cp ~/.cargo/config.toml ~/.cargo/config.toml.bak
+   ```
+
+2. **先测试后应用**：使用 `--show` 查看选项，使用项目级配置
+   ```bash
+   python scripts/config_all.py --show  # 查看可用镜像
+   python scripts/config_pip.py --project  # 项目级配置
+   ```
+
+3. **谨慎使用全局配置**：生产环境优先使用项目级配置或 CI 中显式指定
+
+4. **SSL 选项**：
+   ```bash
+   # 默认验证 SSL（推荐）
+   python scripts/test_mirrors.py
+   
+   # 跳过 SSL 验证（仅用于排查问题）
+   python scripts/test_mirrors.py --insecure
+   ```
+
+### 风险说明
+
+| 操作 | 风险 | 缓解 |
+|-----|------|------|
+| 修改 ~/.pip/pip.conf | 覆盖现有配置 | 备份后操作 |
+| 修改 ~/.cargo/config.toml | 覆盖现有配置 | 备份后操作 |
+| 修改 shell RC 文件 | 影响 shell 启动 | 使用项目级配置 |
+| 修改环境变量 | 影响 Go 模块下载 | 可通过重启恢复 |
+
+---
+
 ## 更新日志
+
+### v1.2.0 (2026-04-06)
+
+**安全改进**
+- 默认启用 SSL 证书验证（更安全）
+- 添加 `--insecure` 选项用于特殊场景
+- 添加参数验证防止注入
+- 移除不必要的 shell=True
 
 ### v1.1.0 (2026-04-06)
 

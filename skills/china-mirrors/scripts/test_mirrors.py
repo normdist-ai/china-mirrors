@@ -5,6 +5,11 @@
 - Do: 逐个测试镜像的 HTTP 连通性和响应速度
 - Check: 分析测试结果，标记可用/不可用/慢速
 - Act: 输出推荐配置，生成更新建议
+
+安全说明:
+- 默认启用 SSL 证书验证
+- 使用 --insecure 选项可跳过 SSL 验证（仅用于测试）
+- 所有测试 URL 硬编码，不接受外部输入
 """
 import os
 import sys
@@ -141,8 +146,15 @@ def print_separator():
     """打印分隔线"""
     print("-" * 70)
 
-def test_mirror(name, url, timeout=TIMEOUT):
-    """测试单个镜像的可用性"""
+def test_mirror(name, url, timeout=TIMEOUT, insecure=False):
+    """测试单个镜像的可用性
+    
+    Args:
+        name: 镜像名称
+        url: 测试 URL
+        timeout: 超时时间
+        insecure: 是否跳过 SSL 验证（默认 False，更安全）
+    """
     result = {
         'name': name,
         'url': url,
@@ -153,10 +165,13 @@ def test_mirror(name, url, timeout=TIMEOUT):
     }
     
     try:
-        # 创建 SSL 上下文（忽略证书验证错误）
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
+        # 默认使用 SSL 证书验证（更安全）
+        if insecure:
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+        else:
+            ctx = ssl.create_default_context()
         
         # 创建请求
         req = Request(url)

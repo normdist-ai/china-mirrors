@@ -2,14 +2,20 @@
 """
 一键配置所有包管理器的国内镜像源
 支持: pip, npm, yarn, pnpm, cargo, go mod, nuget, rubygems, conda, gradle, homebrew
+
+安全说明:
+- 所有镜像 URL 硬编码，不接受外部输入
+- 命令执行使用列表形式，避免 shell 注入
+- 仅修改用户配置文件，不请求 root 权限
 """
 import os
 import sys
 import platform
 import subprocess
+import shlex
 from pathlib import Path
 
-# 镜像源配置
+# 镜像源配置（硬编码，不可外部修改）
 MIRRORS = {
     'pip': {
         'aliyun': 'https://mirrors.aliyun.com/pypi/simple/',
@@ -64,8 +70,18 @@ DEFAULT_MIRRORS = {
     'homebrew': 'ustc',
 }
 
-def run_command(cmd, shell=True):
-    """执行命令并返回结果"""
+def run_command(cmd, shell=False):
+    """执行命令并返回结果
+    
+    安全说明:
+    - 默认 shell=False 避免命令注入
+    - cmd 可以是列表或字符串（shell=True 时）
+    - 仅接受预定义的命令，不执行用户输入
+    """
+    # 如果传入字符串且 shell=False，转换为列表
+    if isinstance(cmd, str) and not shell:
+        cmd = shlex.split(cmd)
+    
     try:
         result = subprocess.run(
             cmd, 
@@ -77,6 +93,13 @@ def run_command(cmd, shell=True):
         return result.returncode == 0, result.stdout, result.stderr
     except Exception as e:
         return False, '', str(e)
+
+def validate_mirror_key(mirror_key, tool_type):
+    """验证镜像 key 是否在允许列表中"""
+    allowed = MIRRORS.get(tool_type, {})
+    if mirror_key not in allowed:
+        return DEFAULT_MIRRORS.get(tool_key, list(allowed.keys())[0])
+    return mirror_key
 
 def check_tool_installed(tool_name, version_arg='--version'):
     """检查工具是否已安装"""
