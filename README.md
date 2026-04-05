@@ -1,4 +1,4 @@
-# 🇨🇳 China Mirrors - AI IDE Agent Skill
+# China Mirrors - AI IDE Agent Skill
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/normdist-ai/china-mirrors.svg)](https://github.com/normdist-ai/china-mirrors/stargazers)
