@@ -918,3 +918,109 @@ cd "$(brew --repo homebrew/cask)" && git remote set-url origin https://github.co
 - [npm 镜像状态](https://npmmirror.com/)
 - [crates.io 镜像](https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index/)
 - [Go Proxy 中国](https://goproxy.cn/)
+
+---
+
+## 输入 / 输出格式
+
+### 输入格式
+
+技能接受以下形式的输入：
+
+| 输入类型 | 示例 | 说明 |
+|---------|------|------|
+| **自然语言** | "pip 安装好慢" | 用户描述问题 |
+| **命令式** | "帮我配置 npm 镜像" | 明确的配置请求 |
+| **检测文件** | 发现 requirements.txt | 自动触发建议 |
+
+### 输出格式
+
+技能输出包含以下部分：
+
+```
+✓ 配置成功消息
+├── 使用的镜像源
+├── 配置文件路径
+└── 验证命令
+```
+
+### 对话示例
+
+**用户**: 我的项目 pip install 特别慢
+**Agent**: 
+```
+我来帮你配置 pip 国内镜像源...
+
+✓ pip 全局配置已保存到: C:\Users\xxx\pip\pip.ini
+✓ 使用镜像: 阿里云 (https://mirrors.aliyun.com/pypi/simple/)
+
+验证配置:
+  pip config list
+  pip install requests
+```
+
+---
+
+## 依赖环境
+
+### 运行时依赖
+
+技能正常工作需要以下环境：
+
+| 工具 | 最低版本 | 用途 | 检测命令 |
+|------|---------|------|---------|
+| Python | 3.7+ | 运行配置脚本 | `python --version` |
+| Node.js | 12+ | npm/yarn/pnpm 配置 | `node --version` |
+| Git | 2.0+ | 仓库操作（如 Homebrew） | `git --version` |
+
+### 可选依赖
+
+以下工具存在时才会配置对应镜像：
+
+| 工具 | 检测命令 | 对应镜像 |
+|------|---------|---------|
+| pip | `pip --version` | pip 镜像 |
+| npm | `npm --version` | npm/yarn/pnpm 镜像 |
+| cargo | `cargo --version` | cargo 镜像 |
+| go | `go version` | go mod 镜像 |
+| dotnet | `dotnet --version` | NuGet 镜像 |
+| gem | `gem --version` | RubyGems 镜像 |
+| conda | `conda --version` | Conda 镜像 |
+| gradle | `gradle --version` | Gradle 镜像 |
+| brew | `brew --version` | Homebrew 镜像 |
+
+### 操作系统支持
+
+- ✅ Windows 10/11 (PowerShell)
+- ✅ Linux (bash/zsh)
+- ✅ macOS (zsh/bash)
+
+---
+
+## 更新日志
+
+### v1.1.0 (2026-04-06)
+
+**新增功能**
+- 支持 5 个新包管理器：NuGet、RubyGems、Conda、Gradle、Homebrew
+- 添加 PDCA 镜像可用性测试脚本 `test_mirrors.py`
+- 实测数据标注各镜像响应时间
+
+**优化**
+- 更新默认镜像为实测最快的源
+- pip: 阿里云 (0.028s)
+- npm: 阿里云 (0.057s)
+- cargo: 阿里云 (0.050s)
+- go: 阿里云 (0.021s)
+
+**文档**
+- 新增输入/输出格式说明
+- 新增依赖环境说明
+- 完善各包管理器配置指南
+
+### v1.0.0 (2025-??-??)
+
+**初始版本**
+- 支持 6 个包管理器：pip、npm、yarn、pnpm、cargo、go mod
+- 提供一键配置脚本
+- 支持全局和项目级配置
