@@ -1,62 +1,64 @@
-# 🇨🇳 China Mirrors - AI IDE Agent 技能
+# 🇨🇳 China Mirrors - AI IDE Agent Skill
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/normdist-ai/china-mirrors.svg)](https://github.com/normdist-ai/china-mirrors/stargazers)
 
-自动配置各种包管理器的国内镜像源，解决中国大陆开发者依赖下载缓慢的问题。
+[中文版文档](README.zh.md)
 
-## 🚀 功能特性
+Automatically configure domestic mirror sources for various package managers in China, solving dependency download speed issues for developers.
 
-- **支持 11 种包管理器**: pip、npm、yarn、pnpm、cargo、go mod、NuGet、RubyGems、Conda、Gradle、Homebrew
-- **PDCA 测试**: 内置镜像可用性和性能测试脚本
-- **跨平台**: Windows、Linux、macOS
-- **一键配置**: 自动化脚本，支持全局和项目级配置
+## 🚀 Features
 
-## 📦 安装
+- **11 Package Managers Supported**: pip, npm, yarn, pnpm, cargo, go mod, NuGet, RubyGems, Conda, Gradle, Homebrew
+- **PDCA Testing**: Built-in script to test mirror availability and performance
+- **Cross-Platform**: Windows, Linux, macOS
+- **One-Click Config**: Automated scripts for global and project-level configuration
 
-### AI IDE 使用（OpenCode、Cursor 等）
+## 📦 Installation
 
-将 `skills/china-mirrors` 文件夹复制到你的 IDE 技能目录：
+### For AI IDEs (OpenCode, Cursor, etc.)
+
+Copy the `skills/china-mirrors` folder to your IDE's skills directory:
 
 - **OpenCode**: `~/.config/opencode/skills/china-mirrors`
 - **Cursor**: `.cursor/skills/china-mirrors`
 - **Lingma**: `.lingma/skills/china-mirrors`
 
-### 手动使用
+### Manual Usage
 
 ```bash
 cd skills/china-mirrors
 python scripts/config_all.py --all
 ```
 
-## 📊 镜像可用性测试
+## 📊 Mirror Availability Test
 
-运行 PDCA 测试脚本验证镜像状态：
+Run the PDCA test script to verify mirror status:
 
 ```bash
 python scripts/test_mirrors.py --verbose
 ```
 
-最新结果（2026-04-06）：**测试 33 个镜像，24 个可用**。
+Latest results (2026-04-06): **33 mirrors tested, 24 available**.
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 skills/
   china-mirrors/
-    SKILL.md              # 技能定义和详细配置指南
-    README.md             # 用户文档
-    QUICK_REFERENCE.md    # 快速参考卡片
-    examples.md           # 使用示例
+    SKILL.md              # Skill definition & detailed guide
+    README.md             # User documentation
+    QUICK_REFERENCE.md    # Quick reference card
+    examples.md           # Usage examples
     scripts/
-      config_all.py       # 一键配置脚本
-      config_pip.py       # pip 专用配置
-      config_npm.js       # npm 专用配置
-      test_mirrors.py     # PDCA 镜像可用性测试
+      config_all.py       # One-click config script
+      config_pip.py       # Pip specific config
+      config_npm.js       # Npm specific config
+      test_mirrors.py     # PDCA mirror availability test
     evals/
-      evals.json          # 评估测试用例
+      evals.json          # Evaluation test cases
 ```
 
-## 📖 文档
+## 📖 Documentation
 
-完整文档请查看 [skills/china-mirrors/README.md](skills/china-mirrors/README.md)。
+See [skills/china-mirrors/README.md](skills/china-mirrors/README.md) for full documentation.
