@@ -98,7 +98,7 @@ def validate_mirror_key(mirror_key, tool_type):
     """验证镜像 key 是否在允许列表中"""
     allowed = MIRRORS.get(tool_type, {})
     if mirror_key not in allowed:
-        return DEFAULT_MIRRORS.get(tool_key, list(allowed.keys())[0])
+        return DEFAULT_MIRRORS.get(tool_type, list(allowed.keys())[0])
     return mirror_key
 
 def check_tool_installed(tool_name, version_arg='--version'):
