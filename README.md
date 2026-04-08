@@ -12,6 +12,40 @@ An Agent Skill that automatically configures domestic mirror sources for various
 
 This skill follows the [SKILL.md Specification v3.0](https://github.com/402md/skillmd) and works with Agent Skills-compatible IDEs (Trae, Cursor, OpenCode, etc.). When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
 
+## Compatibility
+
+### Supported IDEs
+
+This skill is fully compatible with the following IDEs:
+
+| IDE | Support Status | Skills Directory |
+|-----|---------------|-----------------|
+| **Trae** | ✅ Fully Supported | `.trae/skills/` |
+| **Cursor** | ✅ Fully Supported | `.cursor/skills/` |
+| **VS Code** | ✅ Fully Supported | `.vscode/skills/` |
+| **OpenCode** | ✅ Fully Supported | `~/.config/opencode/skills/` |
+| **Lingma** | ✅ Fully Supported | `.lingma/skills/` |
+| **Windsurf** | ✅ Fully Supported | `.windsurf/skills/` |
+| **Claude Code** | ✅ Fully Supported | `~/.config/claude-code/skills/` |
+
+### Supported Agent Platforms
+
+This skill runs on the following Agent platforms:
+
+| Platform | Support Status | Description |
+|----------|---------------|-------------|
+| **OpenClaw** | ✅ Fully Supported | Open-source self-hosted Agent platform with progressive disclosure |
+| **Claude Code** | ✅ Fully Supported | Anthropic's official CLI tool |
+| **Other Agent Frameworks** | ✅ Compatible | Any framework supporting SKILL.md specification |
+
+### Technical Features
+
+- ✅ **SKILL.md v3.0 Specification**: Fully compliant with the latest standard
+- ✅ **Progressive Disclosure**: Metadata → Instructions → Commands, reducing token consumption
+- ✅ **Cross-Platform**: Windows (PowerShell) + Linux/macOS (Bash)
+- ✅ **No Scripts Design**: Agent executes commands directly, no pre-packaged script files
+- ✅ **Secure & Reliable**: All commands are auditable, no hidden execution logic
+
 ## Supported Package Managers
 
 | Package Manager | Config File | Recommended Mirror |

@@ -12,6 +12,40 @@
 
 本技能遵循 [SKILL.md Specification v3.0](https://github.com/402md/skillmd) 规范，兼容支持 Agent Skills 的 IDE（Trae、Cursor、OpenCode 等）。当触发时，Agent 会读取技能指令并**直接在您的系统上执行配置命令**——无需预置脚本。
 
+## 兼容性
+
+### 支持的 IDE
+
+本技能完全兼容以下 IDE：
+
+| IDE | 支持状态 | 技能目录 |
+|-----|---------|---------|
+| **Trae** | ✅ 完全支持 | `.trae/skills/` |
+| **Cursor** | ✅ 完全支持 | `.cursor/skills/` |
+| **VS Code** | ✅ 完全支持 | `.vscode/skills/` |
+| **OpenCode** | ✅ 完全支持 | `~/.config/opencode/skills/` |
+| **Lingma** | ✅ 完全支持 | `.lingma/skills/` |
+| **Windsurf** | ✅ 完全支持 | `.windsurf/skills/` |
+| **Claude Code** | ✅ 完全支持 | `~/.config/claude-code/skills/` |
+
+### 支持的 Agent 平台
+
+本技能可在以下 Agent 平台上运行：
+
+| 平台 | 支持状态 | 说明 |
+|------|---------|------|
+| **OpenClaw** | ✅ 完全支持 | 开源自托管 Agent 平台，支持渐进式披露机制 |
+| **Claude Code** | ✅ 完全支持 | Anthropic 官方 CLI 工具 |
+| **其他 Agent 框架** | ✅ 兼容 | 支持 SKILL.md 规范的框架均可使用 |
+
+### 技术特性
+
+- ✅ **SKILL.md v3.0 规范**：完全符合最新规范
+- ✅ **渐进式披露**：元数据 → 正文 → 执行命令，降低 Token 消耗
+- ✅ **跨平台支持**：Windows (PowerShell) + Linux/macOS (Bash)
+- ✅ **无脚本设计**：Agent 直接执行命令，无需预置脚本文件
+- ✅ **安全可靠**：所有命令可审计，无隐藏执行逻辑
+
 ## 支持的包管理器
 
 | 包管理器 | 配置文件 | 推荐镜像 |
