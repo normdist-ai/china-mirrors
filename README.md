@@ -82,7 +82,7 @@ This skill is deeply optimized for OpenClaw:
 git clone https://github.com/normdist-ai/china-mirrors.git
 
 # Copy to OpenClaw skills directory
-cp -r china-mirrors/skills/china-mirrors ~/.openclaw/skills/
+cp -r china-mirrors ~/.openclaw/skills/
 
 # Verify installation
 openclaw skill list | grep china-mirrors
@@ -95,7 +95,7 @@ openclaw skill list | grep china-mirrors
 git clone https://github.com/normdist-ai/china-mirrors.git
 
 # Copy to your IDE's skills directory
-cp -r china-mirrors/skills/china-mirrors ~/.config/opencode/skills/
+cp -r china-mirrors ~/.config/opencode/skills/
 ```
 
 ### Option 3: IDE-Specific Paths
@@ -139,12 +139,10 @@ Agent: 我来帮您配置 pip 使用国内镜像源。
 
 ```
 china-mirrors/
-├── LICENSE                    # MIT License
-├── README.md                  # English documentation
-├── README.zh.md               # Chinese documentation
-└── skills/
-    └── china-mirrors/
-        └── SKILL.md           # Skill definition (Agent instructions)
+├── SKILL.md                  # Skill definition (Agent instructions)
+├── LICENSE                   # MIT License
+├── README.md                 # English documentation
+└── README.zh.md              # Chinese documentation
 ```
 
 ## How It Works
