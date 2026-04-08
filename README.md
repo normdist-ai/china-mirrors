@@ -1,260 +1,130 @@
-# China Mirrors - AI IDE Agent Skill
+# China Mirrors - Agent Skill
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/normdist-ai/china-mirrors.svg)](https://github.com/normdist-ai/china-mirrors/stargazers)
-[![GitHub release](https://img.shields.io/github/v/release/normdist-ai/china-mirrors)](https://github.com/normdist-ai/china-mirrors/releases)
+[![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://github.com/402md/skillmd)
+[![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://github.com/normdist-ai/china-mirrors)
 
-[中文版文档](README.zh.md)
+[中文文档](README.zh.md)
 
-Automatically configure domestic mirror sources for various package managers in China, solving dependency download speed issues for developers.
+An Agent Skill that automatically configures domestic mirror sources for various package managers in China, solving dependency download speed issues for developers.
 
-## 🚀 Features
+## Overview
 
-- **11 Package Managers Supported**: pip, npm, yarn, pnpm, cargo, go mod, NuGet, RubyGems, Conda, Gradle, Homebrew
-- **PDCA Testing**: Built-in script to test mirror availability and performance
-- **Cross-Platform**: Windows, Linux, macOS
-- **One-Click Config**: Automated scripts for global and project-level configuration
+This skill follows the [SKILL.md Specification v3.0](https://github.com/402md/skillmd) and works with Agent Skills-compatible IDEs (Trae, Cursor, OpenCode, etc.). When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
 
-## ⚡ Quick Start
+## Supported Package Managers
 
-### One-Click Config All
+| Package Manager | Config File | Recommended Mirror |
+|----------------|-------------|-------------------|
+| **pip** (Python) | `requirements.txt`, `pyproject.toml` | Aliyun |
+| **npm/yarn/pnpm** (Node.js) | `package.json` | Huawei Cloud |
+| **cargo** (Rust) | `Cargo.toml` | Aliyun |
+| **go mod** (Go) | `go.mod` | Aliyun |
+| **NuGet** (.NET) | `.csproj`, `packages.config` | Huawei Cloud |
+| **RubyGems** (Ruby) | `Gemfile` | Tsinghua |
+| **Conda** (Python) | `environment.yml` | Tsinghua |
+| **Gradle** (Java/Kotlin) | `build.gradle` | Tencent Cloud |
+| **Maven** (Java) | `pom.xml` | Aliyun |
+| **Homebrew** (macOS) | - | USTC |
+| **Composer** (PHP) | `composer.json` | Aliyun |
 
-```bash
-cd skills/china-mirrors
-python scripts/config_all.py --all
-```
+## Installation
 
-### Config Specific Package Manager
-
-```bash
-# Python pip - Aliyun mirror (default)
-python scripts/config_all.py --pip
-
-# Node.js npm - Tsinghua mirror
-python scripts/config_all.py --npm tsinghua
-
-# Go modules - Aliyun mirror (fastest)
-python scripts/config_all.py --go aliyun
-```
-
-## 📦 Installation
-
-### Option 1: One-Click Install (Recommended)
-
-```bash
-# Using npx (Node.js required)
-npx skills add https://github.com/normdist-ai/china-mirrors --skill china-mirrors
-```
-
-### Option 2: Clone Manually
+### Option 1: Clone to Skills Directory
 
 ```bash
 # Clone the repository
 git clone https://github.com/normdist-ai/china-mirrors.git
 
-# Copy the skill folder to your IDE's skills directory
+# Copy to your IDE's skills directory
 cp -r china-mirrors/skills/china-mirrors ~/.config/opencode/skills/
 ```
 
-### Option 3: For AI IDEs (OpenCode, Cursor, etc.)
-
-Copy the `skills/china-mirrors` folder to your IDE's skills directory:
+### Option 2: IDE-Specific Paths
 
 | IDE | Skills Directory |
 |-----|-----------------|
-| **OpenCode** | `~/.config/opencode/skills/china-mirrors` |
-| **Cursor** | `.cursor/skills/china-mirrors` |
-| **Lingma** | `.lingma/skills/china-mirrors` |
 | **Trae** | `.trae/skills/china-mirrors` |
+| **Cursor** | `.cursor/skills/china-mirrors` |
+| **OpenCode** | `~/.config/opencode/skills/china-mirrors` |
+| **Lingma** | `.lingma/skills/china-mirrors` |
 
-### Manual Usage
+## Usage
 
-```bash
-cd skills/china-mirrors
-python scripts/config_all.py --all
-```
+### Trigger Phrases
 
-## 📊 Mirror Availability Test
+The skill is automatically triggered when you mention:
+- "下载慢" (download slow)
+- "安装依赖" (install dependencies)
+- "配置镜像" (configure mirror)
+- "加速下载" (accelerate download)
+- "设置国内源" (set domestic source)
 
-Run the PDCA test script to verify mirror status:
+Or when your project contains dependency files like `package.json`, `requirements.txt`, `Cargo.toml`, etc.
 
-```bash
-python scripts/test_mirrors.py --verbose
-```
-
-Latest results (2026-04-06): **33 mirrors tested, 24 available**.
-
-## 💻 CLI Reference
-
-### config_all.py
-
-```bash
-python scripts/config_all.py [options]
-
-Options:
-  --pip [mirror]        Configure pip mirror (default: aliyun)
-  --npm [mirror]        Configure npm mirror (default: aliyun)
-  --cargo [mirror]      Configure cargo mirror (default: aliyun)
-  --go [mirror]         Configure go mod mirror (default: aliyun)
-  --nuget [mirror]      Configure NuGet mirror (default: huawei)
-  --rubygems [mirror]   Configure RubyGems mirror (default: tsinghua)
-  --conda [mirror]      Configure Conda mirror (default: tsinghua)
-  --gradle [mirror]     Configure Gradle mirror (default: tencent)
-  --homebrew [mirror]   Configure Homebrew mirror (default: ustc)
-  --all, -a             Configure all detected tools
-  --show, -s            Show available mirrors
-  --timeout <seconds>   Request timeout (default: 10)
-```
-
-### test_mirrors.py
-
-```bash
-python scripts/test_mirrors.py [options]
-
-Options:
-  --type <types>        Test specific mirrors (e.g., pip npm)
-  --verbose, -v         Show detailed output
-  --save, -s            Save results to JSON
-  --timeout <seconds>   Request timeout (default: 10)
-```
-
-## 📖 Usage Examples
-
-### Example 1: Python Project
-
-```bash
-$ python scripts/config_all.py --pip
-
-================================================================
-  Configure Python pip
-================================================================
-✓ pip configuration saved to: C:\Users\xxx\pip\pip.ini
-✓ Using mirror: Aliyun (https://mirrors.aliyun.com/pypi/simple/)
-
-Now you can install dependencies:
-  pip install -r requirements.txt
-```
-
-### Example 2: Multi-Language Project
-
-```bash
-$ python scripts/config_all.py --all
-
-Start configuring mirrors...
-Will configure 5 tools
-
-================================================================
-  Configure Python pip
-================================================================
-✓ pip configured: https://mirrors.aliyun.com/pypi/simple/
-
-================================================================
-  Configure Node.js package managers
-================================================================
-✓ npm configured: https://registry.npmmirror.com
-✓ yarn configured: https://registry.npmmirror.com
-
-...
-
-================================================================
-  Configuration Summary
-================================================================
-✓ Successfully configured:
-  - pip
-  - npm, yarn, pnpm
-  - cargo
-  - go
-```
-
-### Example 3: Test Mirror Availability
-
-```bash
-$ python scripts/test_mirrors.py --verbose
-
-================================================================
-  China Mirror Availability Test (PDCA)
-================================================================
-Test time: 2026-04-06 00:43:46
-Timeout: 8s | Slow threshold: 3.0s
-
-Testing Python (pip)...
-  ✓ aliyun: 0.126s (HTTP 200)
-  ✓ tsinghua: 0.182s (HTTP 200)
-...
-
-================================================================
-  Test Results Summary
-================================================================
-Total: 33 | Passed: 24 | Slow: 1 | Failed: 9
-Pass rate: 72.7%
-
-================================================================
-  Recommended Configuration
-================================================================
-✓ Python (pip): aliyun (0.126s)
-✓ Node.js (npm): aliyun (0.114s)
-...
-```
-
-## 📁 Project Structure
+### Example Interaction
 
 ```
-skills/
-  china-mirrors/
-    SKILL.md              # Skill definition & detailed guide
-    README.md             # This file
-    QUICK_REFERENCE.md    # Quick reference card
-    examples.md           # Usage examples
-    scripts/
-      config_all.py       # One-click config script
-      config_pip.py       # Pip specific config
-      config_npm.js       # Npm specific config
-      test_mirrors.py     # PDCA mirror availability test
-    evals/
-      evals.json          # Evaluation test cases
+User: pip install 太慢了，帮我配置一下
+
+Agent: 我来帮您配置 pip 使用国内镜像源。
+       检测到您的系统是 Windows，我将配置阿里云镜像...
+
+       [Executes configuration commands]
+
+       ✓ pip 已配置为阿里云镜像
+       现在您可以运行 pip install 测试速度
 ```
 
-## 🤝 Contributing
+## Project Structure
 
-Contributions are welcome! Here's how you can help:
+```
+china-mirrors/
+├── LICENSE                    # MIT License
+├── README.md                  # English documentation
+├── README.zh.md               # Chinese documentation
+└── skills/
+    └── china-mirrors/
+        └── SKILL.md           # Skill definition (Agent instructions)
+```
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add some amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+## How It Works
 
-### Ways to Contribute
+1. **Trigger**: Agent detects the need for mirror configuration
+2. **Load**: Agent reads `SKILL.md` for detailed instructions
+3. **Execute**: Agent runs shell commands directly on your system
+4. **Verify**: Agent confirms the configuration is successful
 
-- Report bugs
-- Suggest new features
-- Add support for more package managers
-- Improve documentation
-- Add more mirror sources
-- Test on different platforms
+## Supported Mirrors
 
-## 📋 Related Documents
+| Provider | Speed | Services |
+|----------|-------|----------|
+| **Aliyun** | ⚡ Fast | pip, npm, cargo, go, maven, composer |
+| **Huawei Cloud** | ⚡ Fast | npm, nuget |
+| **Tsinghua University** | 🚀 Stable | pip, cargo, rubygems, conda, homebrew |
+| **USTC** | 🚀 Stable | cargo, rubygems, conda, homebrew |
+| **Tencent Cloud** | 🚀 Good | pip, npm, gradle |
 
-- [SKILL.md](skills/china-mirrors/SKILL.md) - Full skill documentation
-- [QUICK_REFERENCE.md](skills/china-mirrors/QUICK_REFERENCE.md) - Quick reference
-- [examples.md](skills/china-mirrors/examples.md) - More usage examples
+## Contributing
 
-## ⚠️ Known Limitations
+Contributions are welcome! Please feel free to submit issues or pull requests.
 
-- Docker Hub mirrors in China are mostly unavailable
-- Flutter/Dart mirrors have moved to different paths
-- Some mirrors may occasionally be slow or unavailable
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📮 Contact
+## Links
 
-- **GitHub Issues**: https://github.com/normdist-ai/china-mirrors/issues
-- **Author**: normdist-ai
-- **Email**: (open an issue for contact)
+- [SKILL.md Specification](https://github.com/402md/skillmd)
+- [Microsoft Agent Skills](https://learn.microsoft.com/en-us/agent-framework/agents/skills)
+- [GitHub Repository](https://github.com/normdist-ai/china-mirrors)
 
 ---
 
-If you find this project helpful, please give it a ⭐ star!
+If this project helps you, please give it a ⭐ star!
