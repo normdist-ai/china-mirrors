@@ -1,7 +1,7 @@
 # China Mirrors - Agent 技能
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://github.com/402md/skillmd)
+[![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://agentskills.io)
 [![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://github.com/normdist-ai/china-mirrors)
 
 [English Documentation](README.md)
@@ -10,7 +10,7 @@
 
 ## 概述
 
-本技能遵循 [SKILL.md Specification v3.0](https://github.com/402md/skillmd) 规范，**完全支持 OpenClaw 平台**，同时兼容 Trae、Cursor、VS Code 等主流 IDE。当触发时，Agent 会读取技能指令并**直接在您的系统上执行配置命令**——无需预置脚本。
+本技能遵循 [Agent Skills 开放标准](https://agentskills.io)，完全支持 OpenClaw 平台，同时兼容 Trae、Cursor、VS Code、Claude Code 等主流 IDE。当触发时，Agent 会读取技能指令并**直接在您的系统上执行配置命令**——无需预置脚本。
 
 > **🎯 特别说明**：本技能已针对 OpenClaw 进行优化，支持渐进式披露机制，可显著降低 Token 消耗，提升执行效率。
 

@@ -1,7 +1,7 @@
 # China Mirrors - Agent Skill
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://github.com/402md/skillmd)
+[![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://agentskills.io)
 [![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://github.com/normdist-ai/china-mirrors)
 
 [中文文档](README.zh.md)
@@ -10,7 +10,7 @@ An Agent Skill that automatically configures domestic mirror sources for various
 
 ## Overview
 
-This skill follows the [SKILL.md Specification v3.0](https://github.com/402md/skillmd) and **fully supports OpenClaw platform**, while being compatible with mainstream IDEs like Trae, Cursor, and VS Code. When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
+This skill follows the [Agent Skills open standard](https://agentskills.io), fully supports OpenClaw platform, and is compatible with mainstream IDEs like Trae, Cursor, VS Code, Claude Code, etc. When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
 
 > **🎯 Special Note**: This skill is optimized for OpenClaw with progressive disclosure support, significantly reducing token consumption and improving execution efficiency.
 
