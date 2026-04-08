@@ -10,7 +10,9 @@ An Agent Skill that automatically configures domestic mirror sources for various
 
 ## Overview
 
-This skill follows the [SKILL.md Specification v3.0](https://github.com/402md/skillmd) and works with Agent Skills-compatible IDEs (Trae, Cursor, OpenCode, etc.). When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
+This skill follows the [SKILL.md Specification v3.0](https://github.com/402md/skillmd) and **fully supports OpenClaw platform**, while being compatible with mainstream IDEs like Trae, Cursor, and VS Code. When triggered, the Agent reads the skill instructions and **directly executes configuration commands** on your system — no pre-packaged scripts required.
+
+> **🎯 Special Note**: This skill is optimized for OpenClaw with progressive disclosure support, significantly reducing token consumption and improving execution efficiency.
 
 ## Compatibility
 
@@ -34,9 +36,18 @@ This skill runs on the following Agent platforms:
 
 | Platform | Support Status | Description |
 |----------|---------------|-------------|
-| **OpenClaw** | ✅ Fully Supported | Open-source self-hosted Agent platform with progressive disclosure |
+| **OpenClaw** | ✅ **Fully Supported** | 🎯 **Recommended Platform** - Open-source self-hosted Agent platform with perfect progressive disclosure support and optimized token consumption |
 | **Claude Code** | ✅ Fully Supported | Anthropic's official CLI tool |
 | **Other Agent Frameworks** | ✅ Compatible | Any framework supporting SKILL.md specification |
+
+#### OpenClaw Integration Details
+
+This skill is deeply optimized for OpenClaw:
+
+- **Progressive Disclosure**: Three-layer loading mechanism (Metadata → Instructions → Commands) significantly reduces token consumption
+- **Seamless Integration**: Simply copy to `~/.openclaw/skills/` directory to use
+- **Secure & Reliable**: All commands are auditable, compliant with OpenClaw security best practices
+- **Production Ready**: Tested and validated in OpenClaw production environments
 
 ### Technical Features
 
@@ -64,7 +75,20 @@ This skill runs on the following Agent platforms:
 
 ## Installation
 
-### Option 1: Clone to Skills Directory
+### Option 1: OpenClaw Installation (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/normdist-ai/china-mirrors.git
+
+# Copy to OpenClaw skills directory
+cp -r china-mirrors/skills/china-mirrors ~/.openclaw/skills/
+
+# Verify installation
+openclaw skill list | grep china-mirrors
+```
+
+### Option 2: IDE Installation
 
 ```bash
 # Clone the repository
@@ -74,10 +98,11 @@ git clone https://github.com/normdist-ai/china-mirrors.git
 cp -r china-mirrors/skills/china-mirrors ~/.config/opencode/skills/
 ```
 
-### Option 2: IDE-Specific Paths
+### Option 3: IDE-Specific Paths
 
 | IDE | Skills Directory |
 |-----|-----------------|
+| **OpenClaw** | `~/.openclaw/skills/china-mirrors` |
 | **Trae** | `.trae/skills/china-mirrors` |
 | **Cursor** | `.cursor/skills/china-mirrors` |
 | **OpenCode** | `~/.config/opencode/skills/china-mirrors` |

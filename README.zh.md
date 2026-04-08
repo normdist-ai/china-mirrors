@@ -10,7 +10,9 @@
 
 ## 概述
 
-本技能遵循 [SKILL.md Specification v3.0](https://github.com/402md/skillmd) 规范，兼容支持 Agent Skills 的 IDE（Trae、Cursor、OpenCode 等）。当触发时，Agent 会读取技能指令并**直接在您的系统上执行配置命令**——无需预置脚本。
+本技能遵循 [SKILL.md Specification v3.0](https://github.com/402md/skillmd) 规范，**完全支持 OpenClaw 平台**，同时兼容 Trae、Cursor、VS Code 等主流 IDE。当触发时，Agent 会读取技能指令并**直接在您的系统上执行配置命令**——无需预置脚本。
+
+> **🎯 特别说明**：本技能已针对 OpenClaw 进行优化，支持渐进式披露机制，可显著降低 Token 消耗，提升执行效率。
 
 ## 兼容性
 
@@ -34,9 +36,18 @@
 
 | 平台 | 支持状态 | 说明 |
 |------|---------|------|
-| **OpenClaw** | ✅ 完全支持 | 开源自托管 Agent 平台，支持渐进式披露机制 |
+| **OpenClaw** | ✅ **完全支持** | 🎯 **推荐平台** - 开源自托管 Agent 平台，完美支持渐进式披露机制，优化 Token 消耗 |
 | **Claude Code** | ✅ 完全支持 | Anthropic 官方 CLI 工具 |
 | **其他 Agent 框架** | ✅ 兼容 | 支持 SKILL.md 规范的框架均可使用 |
+
+#### OpenClaw 集成说明
+
+本技能已针对 OpenClaw 进行深度优化：
+
+- **渐进式披露**：采用三层加载机制（元数据 → 正文 → 命令），大幅降低 Token 消耗
+- **无缝集成**：只需复制到 `~/.openclaw/skills/` 目录即可使用
+- **安全可靠**：所有命令可审计，符合 OpenClaw 安全最佳实践
+- **生产就绪**：已在 OpenClaw 生产环境中测试验证
 
 ### 技术特性
 
@@ -64,7 +75,20 @@
 
 ## 安装
 
-### 方式一：克隆到技能目录
+### 方式一：OpenClaw 安装（推荐）
+
+```bash
+# 克隆仓库
+git clone https://github.com/normdist-ai/china-mirrors.git
+
+# 复制到 OpenClaw 技能目录
+cp -r china-mirrors/skills/china-mirrors ~/.openclaw/skills/
+
+# 验证安装
+openclaw skill list | grep china-mirrors
+```
+
+### 方式二：IDE 安装
 
 ```bash
 # 克隆仓库
@@ -74,10 +98,11 @@ git clone https://github.com/normdist-ai/china-mirrors.git
 cp -r china-mirrors/skills/china-mirrors ~/.config/opencode/skills/
 ```
 
-### 方式二：IDE 特定路径
+### 方式三：IDE 特定路径
 
 | IDE | 技能目录 |
 |-----|---------|
+| **OpenClaw** | `~/.openclaw/skills/china-mirrors` |
 | **Trae** | `.trae/skills/china-mirrors` |
 | **Cursor** | `.cursor/skills/china-mirrors` |
 | **OpenCode** | `~/.config/opencode/skills/china-mirrors` |
