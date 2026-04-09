@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Skill Type](https://img.shields.io/badge/Type-SKILL-blue.svg)](https://agentskills.io)
-[![Version](https://img.shields.io/badge/Version-2.0.0-green.svg)](https://github.com/normdist-ai/china-mirrors)
+[![Version](https://img.shields.io/badge/Version-2.1.0-green.svg)](https://github.com/normdist-ai/china-mirrors)
 
 [English Documentation](README.md)
 
