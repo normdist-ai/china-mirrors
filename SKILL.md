@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires Python, Node.js, Rust, Go, .NET, Ruby, Conda, or Homebrew. Supports Windows, Linux, and macOS. No additional dependencies required.
 metadata:
   author: normdist-ai
-  version: "2.1.1"
+  version: "2.2.0"
   repository: https://github.com/normdist-ai/china-mirrors
   homepage: https://github.com/normdist-ai/china-mirrors#readme
   keywords: mirror, china, pip, npm, cargo, goproxy, nuget, rubygems, conda, homebrew
